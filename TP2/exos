@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        select {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: 1px solid #000;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        span {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        #menu {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 120px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        #menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        #menu a:hover {
+            background-color: #f1f1f1;
+        }
+        .menuTrigger {
+            height: 10px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="color:red">Exo1</h2>
+    <input type="text" id="num1" placeholder="Entrez le premier nombre">
+    <input type="text" id="num2" placeholder="Entrez le deuxième nombre">
+    <button onclick="addition()">Additionner</button>
+    <span id="resultat1"></span> <br><br><br>
+    <h2 style="color:red">Exo2</h2>
+
+    <input type="text" id="num3" placeholder="Entrez le nombre">
+    <input type="text" id="num4" placeholder="Entrez le nombre">
+    <button class="button" onclick="permuter()">permuter</button><br><br><br>
+
+    <h2 style="color:red">Exo3</h2>
+
+    <input type="text" id="num5" placeholder="Entrez le premier nombre">
+    <input type="text" id="num6" placeholder="Entrez le deuxième nombre">
+    <label for="cars"><b>Choose an operation :</b></label>
+    <select id="operation" name="operation">
+        <option value="addition">+</option>
+        <option value="subtraction">-</option>
+        <option value="division">/</option>
+        <option value="multiplication">*</option>
+    </select>
+    <button class="button" onclick="calculer()">calculer</button>
+    <span id="resultat2"></span> <br><br><br>
+
+    <h2 style="color:red">Exo4</h2>
+
+    <button class="button" onclick="saisir()">saisir les nombres</button>
+    <br><br><br>
+
+    <h2 style="color:red">Exo5</h2>
+
+    <button class="button" onclick="insérer()">insérer</button>
+    <span id="resultat3"></span> 
+    <br><br><br>
+
+    <h2 style="color:red">Exo6</h2>
+    <ul>
+        <li><label id="email_label"> email :</label></li>
+        <input  type="email" id="email"> <br>
+        <li><label id="obj_label"> objet :</label></li>
+        <input  type="text" id="obj"> <br>
+        <li><label id="corps_label"> corps :</label></li>
+        <textarea id="corps"></textarea> <br>
+    </ul>
+    <button class="button" onclick="envoyer()">envoyer</button>
+    <span id="resultat4"></span>
+    <br><br><br>
+
+    <h2 style="color:red">Exo7</h2>
+    <a href="https://exemple.com" onclick="return preventRedirection(event)">Lien avec redirection</a> <br><br>
+
+    <div id="menuTrigger" class="menuTrigger" onclick="toggleMenu()">Cliquez ici pour afficher le menu</div>
+    <div id="menu" class="menu">
+        <a href="#">Option 1</a>
+        <a href="#">Option 2</a>
+        <a href="#">Option 3</a>
+    </div>
+    <br><br><br>
+    <h3>end of the tp, thank you for consideration</h3>
+
+    <script>
+        //exo1
+        function addition() {
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            var resultat = num1 + num2;
+            document.getElementById("resultat1").innerText = "Le résultat de l'addition est : " + resultat;
+        }
+
+        //exo2
+        function permuter() {
+            var num3 = document.getElementById("num3").value;
+            var num4 = document.getElementById("num4").value;
+            var temp = num3;
+            num3 = num4;
+            num4 = temp;
+            document.getElementById("num3").value = num3;
+            document.getElementById("num4").value = num4;
+        }
+
+        //exo3
+        function calculer() {
+            var num5 = parseFloat(document.getElementById("num5").value);
+            var num6 = parseFloat(document.getElementById("num6").value);
+            var operation = document.getElementById("operation").value;
+            var resultat;
+
+            switch(operation) {
+                case "addition":
+                    resultat = num5 + num6;
+                    break;
+                case "subtraction":
+                    resultat = num5 - num6;
+                    break;
+                case "division":
+                    resultat = num5 / num6;
+                    break;
+                case "multiplication":
+                    resultat = num5 * num6;
+                    break;
+                default:
+                    resultat = "Opération non valide";
+            }
+
+            document.getElementById("resultat2").innerText = "Le résultat du calcul est : " + resultat;
+        }
+
+        //exo4
+        function saisir() {
+            var n1 = parseFloat(prompt("Veuillez entrer le premier nombre : "));
+            var n2 = parseFloat(prompt("Veuillez entrer le deuxième nombre : "));
+            var n3 = parseFloat(prompt("Veuillez entrer le troisième nombre : "));
+
+            if (!isNaN(n1) && !isNaN(n2) && !isNaN(n3)) {
+                if (n1 === n2 && n1 === n3) {
+                    alert("Les trois variables sont identiques.");
+                } else if (n1 === n2 || n1 === n3 || n2 === n3) {
+                    alert("Deux des variables sont de valeurs égales.");
+                } else {
+                    alert("Les trois variables sont différentes.");
+                }
+            }
+        }
+
+        //exo5
+        function insérer() {
+            var HT = parseFloat(prompt("Veuillez entrer le montant HT : "));
+            var TVA = parseFloat(prompt("Veuillez entrer le taux de TVA : "));
+
+            if (!isNaN(HT) && !isNaN(TVA)) {
+                var TTC = HT + (HT * TVA / 100);
+                document.getElementById("resultat3").innerText = "Le TTC est : " + TTC.toFixed(2);
+            }
+        }
+
+        //exo6
+        function envoyer() {
+            var email = document.getElementById("email").value;
+            var object = document.getElementById("obj").value;
+            var corps = document.getElementById("corps").value;
+
+            document.getElementById("resultat4").innerText = "Sender : " + email + ", Object : " + object + ", Corps : " + corps;
+        }
+
+        //exo7
+
+        function preventRedirection(event) {
+            event.preventDefault();
+            alert("Redirection interdite");
+        }
+
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            if (menu.style.display === "none") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+
+        document.getElementById("menuTrigger").addEventListener("mouseleave", function() {
+            var menu = document.getElementById("menu");
+            menu.style.display = "none";
+        });
+    </script>
+</body>
+</html>
